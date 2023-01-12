@@ -41,7 +41,6 @@ class BarcodeScanner extends StatelessWidget {
       ..src = PackageConstant.barcodeFileWebPath
       ..style.border = 'none'
       ..onLoad.listen((event) async {
-        html.window.onMessage.listen((event) {
         /// Create reader setting qrBox width and height
         html.CustomEvent event = new html.CustomEvent("reader", detail : {
           "qrBoxWidth": scanWidth,
@@ -50,6 +49,7 @@ class BarcodeScanner extends StatelessWidget {
         html.window.document.dispatchEvent(event);
 
         /// Barcode listener on success barcode scanned
+        html.window.onMessage.listen((event) {
           /// If barcode is null then assign scanned barcode
           /// and close the screen otherwise keep scanning
           if (barcodeNumber == null) {
